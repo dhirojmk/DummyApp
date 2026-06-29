@@ -23,7 +23,6 @@ object HttpClientFactory {
         baseUrl: String,
         tokenManager: TokenManager
     ): HttpClient {
-
         val authPlugin = createClientPlugin("AuthPlugin") {
             onRequest { request, _ ->
                 val token = tokenManager.getAccessToken()

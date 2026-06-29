@@ -31,7 +31,7 @@ val appModule = module {
     }
 
     single {
-        AuthApi(get(),get())
+        AuthApi(get())
     }
 
     single<QuoteRepository> {
