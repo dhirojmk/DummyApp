@@ -5,12 +5,12 @@ import com.dhiroj.dummyapp.data.dataStore.createDataStore
 import com.dhiroj.dummyapp.data.network.AuthApi
 import com.dhiroj.dummyapp.data.network.HttpClientFactory
 import com.dhiroj.dummyapp.data.network.QuoteApi
-import com.dhiroj.dummyapp.data.repositoryImpl.AuthRepoImpl.AuthRepositoryImpl
-import com.dhiroj.dummyapp.data.repositoryImpl.QuoteRepositoryImpl
+import com.dhiroj.dummyapp.domain.repositoryImpl.AuthRepositoryImpl
+import com.dhiroj.dummyapp.domain.repositoryImpl.QuoteRepositoryImpl
 import com.dhiroj.dummyapp.data.tokenManager.TokenManager
-import com.dhiroj.dummyapp.domain.AuthRepo.AuthRepository
-import com.dhiroj.dummyapp.domain.QuoteRepository
-import com.dhiroj.dummyapp.domain.usecase.AuthUseCase.AuthUseCase
+import com.dhiroj.dummyapp.domain.repository.AuthRepository
+import com.dhiroj.dummyapp.domain.repository.QuoteRepository
+import com.dhiroj.dummyapp.domain.usecase.AuthUseCase
 import com.dhiroj.dummyapp.domain.usecase.GetQuotesUseCase
 import com.dhiroj.dummyapp.presentation.viewModel.AuthViewModel
 import com.dhiroj.dummyapp.presentation.viewModel.QuoteViewModel

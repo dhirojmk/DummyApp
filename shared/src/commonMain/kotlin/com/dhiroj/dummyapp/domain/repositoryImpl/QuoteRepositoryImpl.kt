@@ -1,9 +1,8 @@
-package com.dhiroj.dummyapp.data.repositoryImpl
+package com.dhiroj.dummyapp.domain.repositoryImpl
 
-import com.dhiroj.dummyapp.data.model.Quote
 import com.dhiroj.dummyapp.data.model.QuoteResponse
 import com.dhiroj.dummyapp.data.network.QuoteApi
-import com.dhiroj.dummyapp.domain.QuoteRepository
+import com.dhiroj.dummyapp.domain.repository.QuoteRepository
 import com.dhiroj.dummyapp.utils.BaseApiResponseHandler
 import com.dhiroj.dummyapp.utils.NetworkResult
 import kotlinx.coroutines.flow.Flow

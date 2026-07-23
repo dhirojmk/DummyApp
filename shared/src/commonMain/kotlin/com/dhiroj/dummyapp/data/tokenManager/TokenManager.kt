@@ -12,8 +12,7 @@ import kotlinx.coroutines.flow.map
 class TokenManager(
     private val dataStore: DataStore<Preferences>
 ) {
-    val accessToken: Flow<String?>
-        get() = dataStore.data.map {
+    val accessToken: Flow<String?> get() = dataStore.data.map {
             it[PreferenceKeys.ACCESS_TOKEN]
         }
     suspend fun getAccessToken(): String? {

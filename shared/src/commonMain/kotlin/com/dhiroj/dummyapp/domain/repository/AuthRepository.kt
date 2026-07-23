@@ -1,4 +1,4 @@
-package com.dhiroj.dummyapp.domain.AuthRepo
+package com.dhiroj.dummyapp.domain.repository
 
 import com.dhiroj.dummyapp.data.model.login.LoginRequest
 import com.dhiroj.dummyapp.data.model.login.LoginResponse

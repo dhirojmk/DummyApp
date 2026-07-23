@@ -8,8 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dhiroj.dummyapp.data.model.QuoteResponse
-import com.dhiroj.dummyapp.presentation.QuoteCard
+import com.dhiroj.dummyapp.presentation.Quote.QuoteCard
 import com.dhiroj.dummyapp.presentation.viewModel.AuthViewModel
 import com.dhiroj.dummyapp.presentation.viewModel.QuoteViewModel
 import com.dhiroj.dummyapp.utils.NetworkResult

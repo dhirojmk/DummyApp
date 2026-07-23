@@ -1,11 +1,11 @@
-package com.dhiroj.dummyapp.domain.usecase.AuthUseCase
+package com.dhiroj.dummyapp.domain.usecase
 
 import com.dhiroj.dummyapp.data.model.login.LoginRequest
 import com.dhiroj.dummyapp.data.model.login.LoginResponse
 import com.dhiroj.dummyapp.data.model.login.RefreshRequest
 import com.dhiroj.dummyapp.data.model.login.RefreshResponse
 import com.dhiroj.dummyapp.data.model.login.UserResponse
-import com.dhiroj.dummyapp.domain.AuthRepo.AuthRepository
+import com.dhiroj.dummyapp.domain.repository.AuthRepository
 
 class AuthUseCase(
     private val repository: AuthRepository

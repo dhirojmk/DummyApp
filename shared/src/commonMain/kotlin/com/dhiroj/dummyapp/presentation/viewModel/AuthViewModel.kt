@@ -1,7 +1,7 @@
 package com.dhiroj.dummyapp.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
-import com.dhiroj.dummyapp.domain.usecase.AuthUseCase.AuthUseCase
+import com.dhiroj.dummyapp.domain.usecase.AuthUseCase
 import androidx.lifecycle.viewModelScope
 import com.dhiroj.dummyapp.data.model.login.LoginRequest
 import com.dhiroj.dummyapp.data.tokenManager.TokenManager
