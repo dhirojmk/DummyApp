@@ -20,6 +20,13 @@ class AuthViewModel(
 
     private val _uiState = MutableStateFlow(AuthUiState())
     val uiState: StateFlow<AuthUiState> = _uiState.asStateFlow()
+    fun clearError(){
+        _uiState.update {
+            it.copy(
+                error = null
+            )
+        }
+    }
     fun login(
         username: String,
         password: String

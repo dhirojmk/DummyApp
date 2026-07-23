@@ -32,7 +32,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import com.dhiroj.dummyapp.presentation.viewModel.AuthViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -41,27 +43,21 @@ fun LoginScreen(
     onLoginSuccess: () -> Unit,
     viewModel: AuthViewModel = koinViewModel()
 ) {
-
     val state by viewModel.uiState.collectAsState()
-
     var username by remember {
         mutableStateOf("emilys")
     }
-
     var password by remember {
         mutableStateOf("emilyspass")
     }
-
     var showPassword by remember {
         mutableStateOf(false)
     }
-
     LaunchedEffect(state.isLoginSuccess) {
         if (state.isLoginSuccess) {
             onLoginSuccess()
         }
     }
-
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -153,20 +149,7 @@ fun LoginScreen(
 
                         Text("Show Password")
                     }
-
-                    Spacer(Modifier.height(8.dp))
-
-                    TextButton(
-                        modifier = Modifier.align(Alignment.End),
-                        onClick = {
-                            // TODO
-                        }
-                    ) {
-                        Text("Forgot Password?")
-                    }
-
                     Spacer(Modifier.height(12.dp))
-
                     Button(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -182,15 +165,11 @@ fun LoginScreen(
 
                         }
                     ) {
-
                         if (state.isLoading) {
-
                             CircularProgressIndicator(
                                 strokeWidth = 2.dp
                             )
-
                         } else {
-
                             Text(
                                 text = "Sign In",
                                 style = MaterialTheme.typography.titleMedium
@@ -198,23 +177,61 @@ fun LoginScreen(
 
                         }
                     }
-
-                    state.error?.let {
-
-                        Spacer(Modifier.height(16.dp))
-
-                        Text(
-                            text = it,
-                            color = MaterialTheme.colorScheme.error,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    }
                 }
 
             }
-
+            state.error?.takeIf { it.isNotBlank() }?.let { error ->
+                CustomErrorDialog(
+                    message = error,
+                    onDismiss = {
+                        viewModel.clearError()
+                    }
+                )
+            }
         }
-
     }
+}
 
+@Composable
+fun CustomErrorDialog(
+    message: String,
+    onDismiss: () -> Unit
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(20.dp),
+            tonalElevation = 8.dp,
+            color = MaterialTheme.colorScheme.surface
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = "⚠ Error",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.error
+                )
+
+                Spacer(Modifier.height(16.dp))
+
+                Text(
+                    text = message,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(Modifier.height(24.dp))
+
+                Button(
+                    onClick = onDismiss,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("OK")
+                }
+            }
+        }
+    }
 }
