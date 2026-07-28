@@ -2,9 +2,8 @@ package com.dhiroj.dummyapp.di
 
 
 import com.dhiroj.dummyapp.data.dataStore.createDataStore
-import com.dhiroj.dummyapp.data.network.AuthApi
+import com.dhiroj.dummyapp.data.network.RemoteApi
 import com.dhiroj.dummyapp.data.network.HttpClientFactory
-import com.dhiroj.dummyapp.data.network.QuoteApi
 import com.dhiroj.dummyapp.domain.repositoryImpl.AuthRepositoryImpl
 import com.dhiroj.dummyapp.domain.repositoryImpl.QuoteRepositoryImpl
 import com.dhiroj.dummyapp.data.tokenManager.TokenManager
@@ -24,13 +23,8 @@ val appModule = module {
             baseUrl = "https://dummyjson.com", tokenManager = get()
         )
     }
-
     single {
-        QuoteApi(get())
-    }
-
-    single {
-        AuthApi(get())
+        RemoteApi(get())
     }
 
     single<QuoteRepository> {
