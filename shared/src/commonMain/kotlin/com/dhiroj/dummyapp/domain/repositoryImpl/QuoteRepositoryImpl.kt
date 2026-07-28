@@ -17,9 +17,3 @@ class QuoteRepositoryImpl(
         }
     }
 }
-//.copy(
-//                quotes = api.getQuotes().quotes.shuffled(),
-//                total = api.getQuotes().total,
-//                skip = api.getQuotes().skip,
-//                limit = api.getQuotes().limit
-//            )
