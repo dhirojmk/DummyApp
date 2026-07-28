@@ -50,10 +50,12 @@ fun QuoteScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = state.error.message ?: "Something went wrong",
-                        style = MaterialTheme.typography.titleMedium
-                    )
+                    state.error.message?.let {
+                        Text(
+                            text = it ,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
                 }
             }
 

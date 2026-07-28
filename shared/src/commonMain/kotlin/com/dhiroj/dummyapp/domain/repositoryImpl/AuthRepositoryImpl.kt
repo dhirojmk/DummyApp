@@ -7,14 +7,19 @@ import com.dhiroj.dummyapp.data.model.login.RefreshResponse
 import com.dhiroj.dummyapp.data.model.login.UserResponse
 import com.dhiroj.dummyapp.data.network.AuthApi
 import com.dhiroj.dummyapp.domain.repository.AuthRepository
+import com.dhiroj.dummyapp.utils.BaseApiResponseHandler
+import com.dhiroj.dummyapp.utils.NetworkResult
+import kotlinx.coroutines.flow.Flow
 
 class AuthRepositoryImpl(
     private val authApi: AuthApi
-) : AuthRepository {
+) :  BaseApiResponseHandler(),AuthRepository {
     override suspend fun login(
         request: LoginRequest
-    ): LoginResponse {
-        return authApi.login(request)
+    ): Flow<NetworkResult<LoginResponse>> {
+        return toResultFlow {
+            authApi.login(request)
+        }
     }
 
     override suspend fun getCurrentUser(): UserResponse {

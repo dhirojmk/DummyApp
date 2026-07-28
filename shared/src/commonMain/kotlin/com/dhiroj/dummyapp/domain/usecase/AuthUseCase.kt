@@ -6,6 +6,8 @@ import com.dhiroj.dummyapp.data.model.login.RefreshRequest
 import com.dhiroj.dummyapp.data.model.login.RefreshResponse
 import com.dhiroj.dummyapp.data.model.login.UserResponse
 import com.dhiroj.dummyapp.domain.repository.AuthRepository
+import com.dhiroj.dummyapp.utils.NetworkResult
+import kotlinx.coroutines.flow.Flow
 
 class AuthUseCase(
     private val repository: AuthRepository
@@ -13,7 +15,7 @@ class AuthUseCase(
 
     suspend fun login(
         request: LoginRequest
-    ): LoginResponse {
+    ): Flow<NetworkResult<LoginResponse>> {
         return repository.login(request)
     }
 

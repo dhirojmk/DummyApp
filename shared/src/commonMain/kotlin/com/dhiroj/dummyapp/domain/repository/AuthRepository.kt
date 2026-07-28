@@ -5,12 +5,14 @@ import com.dhiroj.dummyapp.data.model.login.LoginResponse
 import com.dhiroj.dummyapp.data.model.login.RefreshRequest
 import com.dhiroj.dummyapp.data.model.login.RefreshResponse
 import com.dhiroj.dummyapp.data.model.login.UserResponse
+import com.dhiroj.dummyapp.utils.NetworkResult
+import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
 
     suspend fun login(
         request: LoginRequest
-    ): LoginResponse
+    ): Flow<NetworkResult<LoginResponse>>
 
     suspend fun getCurrentUser(): UserResponse
 

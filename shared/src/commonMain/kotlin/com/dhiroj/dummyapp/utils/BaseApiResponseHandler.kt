@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.flow
 
 abstract class BaseApiResponseHandler {
 
-    protected inline fun <reified T> toResultFlow(
-        crossinline apiCall: suspend () -> T
+    protected fun <T> toResultFlow(
+        apiCall: suspend () -> T
     ): Flow<NetworkResult<T>> = flow {
 
         emit(NetworkResult.Loading)

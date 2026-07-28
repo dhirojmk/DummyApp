@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.dhiroj.dummyapp.data.model.login.LoginRequest
 import com.dhiroj.dummyapp.data.tokenManager.TokenManager
 import com.dhiroj.dummyapp.utils.AuthUiState
+import com.dhiroj.dummyapp.utils.NetworkResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -32,37 +33,37 @@ class AuthViewModel(
         password: String
     ) {
         viewModelScope.launch {
-            _uiState.update {
-                it.copy(
-                    isLoading = true,
-                    error = null
-                )
-            }
-            try {
-                val response = authUseCase.login(
-                    LoginRequest(
-                        username = username,
-                        password = password
-                    )
-                )
-                tokenManager.saveAccessToken(response.accessToken)
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        isLoginSuccess = true,
-                        user = null
-                    )
-                }
-            } catch (e: Exception) {
+            authUseCase.login(LoginRequest(username, password))
+                .collect { result ->
+                    when (result) {
+                        NetworkResult.Loading -> {
+                            _uiState.update {
+                                it.copy(isLoading = true, error = null)
+                            }
+                        }
 
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        error = e.message
-                    )
-                }
+                        is NetworkResult.Success -> {
+                            tokenManager.saveAccessToken(result.data.accessToken)
+                            _uiState.update {
+                                it.copy(
+                                    isLoading = false,
+                                    isLoginSuccess = true
+                                )
+                            }
+                        }
 
-            }
+                        is NetworkResult.Error -> {
+                            _uiState.update {
+                                it.copy(
+                                    isLoading = false,
+                                    error = result.error.message
+                                )
+                            }
+                        }
+
+                        NetworkResult.Empty -> Unit
+                    }
+                }
         }
     }
 
