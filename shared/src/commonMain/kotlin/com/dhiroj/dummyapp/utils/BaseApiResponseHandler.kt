@@ -1,5 +1,6 @@
 package com.dhiroj.dummyapp.utils
 
+import com.dhiroj.dummyapp.data.model.error.NetworkError
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ServerResponseException
@@ -11,29 +12,22 @@ abstract class BaseApiResponseHandler {
     protected fun <T> toResultFlow(
         apiCall: suspend () -> T
     ): Flow<NetworkResult<T>> = flow {
-
         emit(NetworkResult.Loading)
-
         try {
             emit(NetworkResult.Success(apiCall()))
         } catch (e: ClientRequestException) {
-
             emit(
                 NetworkResult.Error(
                     parseError(e)
                 )
             )
-
         } catch (e: ServerResponseException) {
-
             emit(
                 NetworkResult.Error(
                     parseError(e)
                 )
             )
-
         } catch (e: Exception) {
-
             emit(
                 NetworkResult.Error(
                     handleException(e)

@@ -9,23 +9,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.dhiroj.dummyapp.presentation.Quote.QuoteCard
-import com.dhiroj.dummyapp.presentation.viewModel.AuthViewModel
-import com.dhiroj.dummyapp.presentation.viewModel.QuoteViewModel
+import com.dhiroj.dummyapp.presentation.viewModel.ViewModel
 import com.dhiroj.dummyapp.utils.NetworkResult
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun QuoteScreen(
-    authViewModel: AuthViewModel = koinViewModel(),
-    quoteViewModel: QuoteViewModel = koinViewModel()
+    viewModel: ViewModel = koinViewModel(),
 ) {
 
-    val authState by authViewModel.uiState.collectAsState()
-    val quoteState by quoteViewModel.getQuoteResponseState.collectAsState()
+    val authState by viewModel.uiState.collectAsState()
+    val quoteState by viewModel.getQuoteResponseState.collectAsState()
 
     LaunchedEffect(Unit) {
-        authViewModel.getCurrentUser()
-        quoteViewModel.getQuotes()
+        viewModel.getCurrentUser()
+        viewModel.getQuotes()
     }
 
     Surface(

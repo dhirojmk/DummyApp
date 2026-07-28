@@ -1,4 +1,4 @@
-package com.dhiroj.dummyapp.utils
+package com.dhiroj.dummyapp.data.model.error
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

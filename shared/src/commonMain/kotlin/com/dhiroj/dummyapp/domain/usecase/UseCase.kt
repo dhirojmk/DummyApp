@@ -1,16 +1,15 @@
 package com.dhiroj.dummyapp.domain.usecase
 
+import com.dhiroj.dummyapp.data.model.Quote.QuoteResponse
 import com.dhiroj.dummyapp.data.model.login.LoginRequest
 import com.dhiroj.dummyapp.data.model.login.LoginResponse
-import com.dhiroj.dummyapp.data.model.login.RefreshRequest
-import com.dhiroj.dummyapp.data.model.login.RefreshResponse
 import com.dhiroj.dummyapp.data.model.login.UserResponse
-import com.dhiroj.dummyapp.domain.repository.AuthRepository
+import com.dhiroj.dummyapp.domain.repository.Repository
 import com.dhiroj.dummyapp.utils.NetworkResult
 import kotlinx.coroutines.flow.Flow
 
-class AuthUseCase(
-    private val repository: AuthRepository
+class UseCase(
+    private val repository: Repository
 ) {
 
     suspend fun login(
@@ -22,10 +21,7 @@ class AuthUseCase(
     suspend fun getCurrentUser(): UserResponse {
         return repository.getCurrentUser()
     }
-
-    suspend fun refreshToken(
-        request: RefreshRequest
-    ): RefreshResponse {
-        return repository.refreshToken(request)
+    suspend operator fun invoke():Flow<NetworkResult<QuoteResponse>> {
+        return repository.getQuotes()
     }
 }

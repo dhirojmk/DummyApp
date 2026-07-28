@@ -1,4 +1,4 @@
-package com.dhiroj.dummyapp.data.model
+package com.dhiroj.dummyapp.data.model.Quote
 
 import kotlinx.serialization.Serializable
 
