@@ -1,31 +1,40 @@
 package com.dhiroj.dummyapp.navigation
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.saveable.rememberSerializable
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
+import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import com.dhiroj.dummyapp.presentation.LoginScreen.LoginScreen
 import com.dhiroj.dummyapp.presentation.screen.QuoteScreen
 
 @Composable
 fun AppNavigation() {
-    val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = Routes.LOGIN
-    ) {
-        composable<Routes.LOGIN> {
-            LoginScreen(
-                onLoginSuccess = {
-                    navController.navigate(Routes.HOME) {
-                        popUpTo(Routes.LOGIN) {
-                            inclusive = true
-                        }
+    val backStack: MutableList<Routes> =
+        rememberSerializable(serializer = SnapshotStateListSerializer()) {
+            mutableStateListOf(Routes.LOGIN)
+        }
+
+    NavDisplay(
+        backStack = backStack,
+        onBack = {
+            if (backStack.size > 1) {
+                backStack.removeLastOrNull()
+            }
+        },
+        entryProvider = entryProvider {
+            entry<Routes.LOGIN> {
+                LoginScreen(
+                    onLoginSuccess = {
+                        backStack.removeLastOrNull()
+                        backStack.add(Routes.HOME)
                     }
-                }
-            )
+                )
+            }
+
+            entry<Routes.HOME> {
+                QuoteScreen()
+            }
         }
-        composable<Routes.HOME> {
-            QuoteScreen()
-        }
-    }
+    )
 }
