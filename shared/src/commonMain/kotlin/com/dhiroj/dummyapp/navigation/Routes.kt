@@ -1,6 +1,11 @@
 package com.dhiroj.dummyapp.navigation
 
-object Routes {
-    const val LOGIN = "login"
-    const val HOME = "home"
+import kotlinx.serialization.Serializable
+@Serializable
+sealed class Routes {
+    @Serializable
+    data object LOGIN : Routes()
+    @Serializable
+    data object HOME : Routes()
+
 }

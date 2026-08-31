@@ -13,7 +13,7 @@ fun AppNavigation() {
         navController = navController,
         startDestination = Routes.LOGIN
     ) {
-        composable(Routes.LOGIN) {
+        composable<Routes.LOGIN> {
             LoginScreen(
                 onLoginSuccess = {
                     navController.navigate(Routes.HOME) {
@@ -24,7 +24,7 @@ fun AppNavigation() {
                 }
             )
         }
-        composable(Routes.HOME) {
+        composable<Routes.HOME> {
             QuoteScreen()
         }
     }
