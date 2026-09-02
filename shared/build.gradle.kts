@@ -45,6 +45,8 @@ kotlin {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
+            implementation("org.jetbrains.compose.material3:material3:1.9.0")
+            implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
             implementation(libs.compose.uiToolingPreview)
@@ -75,6 +77,9 @@ kotlin {
             //DataStore
             api(libs.androidx.datastore)
             api(libs.androidx.datastore.preferences)
+
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
 
         }
 

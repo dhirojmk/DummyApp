@@ -4,9 +4,12 @@ import com.dhiroj.dummyapp.data.model.Quote.QuoteResponse
 import com.dhiroj.dummyapp.data.model.login.LoginRequest
 import com.dhiroj.dummyapp.data.model.login.LoginResponse
 import com.dhiroj.dummyapp.data.model.login.UserResponse
+import com.dhiroj.dummyapp.data.model.product.Product
+import com.dhiroj.dummyapp.data.model.product.ProductsResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 
@@ -29,4 +32,19 @@ class RemoteApi(
             .get(ApiEndpoints.QUOTES)
             .body()
     }
+
+    // GET /products
+    suspend fun getProducts(): ProductsResponse {
+        return client.get(ApiEndpoints.PRODUCTS).body()
+    }
+
+    suspend fun getProductById(
+        productId: Int
+    ): Product {
+        return client.get(ApiEndpoints.PRODUCT_BY_ID) {
+            setBody(productId)
+        }.body()
+    }
+
+
 }

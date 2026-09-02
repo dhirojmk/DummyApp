@@ -15,6 +15,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun QuoteScreen(
+    modifier: Modifier = Modifier,
     viewModel: ViewModel = koinViewModel(),
 ) {
 
@@ -27,7 +28,7 @@ fun QuoteScreen(
     }
 
     Surface(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
 

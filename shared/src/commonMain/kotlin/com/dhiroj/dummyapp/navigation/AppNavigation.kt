@@ -5,6 +5,7 @@ import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
+import com.dhiroj.dummyapp.presentation.HomeScreen.HomeScreen
 import com.dhiroj.dummyapp.presentation.LoginScreen.LoginScreen
 import com.dhiroj.dummyapp.presentation.screen.QuoteScreen
 
@@ -33,7 +34,7 @@ fun AppNavigation() {
             }
 
             entry<Routes.HOME> {
-                QuoteScreen()
+                HomeScreen()
             }
         }
     )

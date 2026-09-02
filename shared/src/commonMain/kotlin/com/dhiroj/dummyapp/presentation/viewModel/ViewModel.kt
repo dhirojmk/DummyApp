@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dhiroj.dummyapp.data.model.Quote.QuoteResponse
 import com.dhiroj.dummyapp.data.model.login.LoginRequest
+import com.dhiroj.dummyapp.data.model.product.Product
+import com.dhiroj.dummyapp.data.model.product.ProductsResponse
 import com.dhiroj.dummyapp.data.tokenManager.TokenManager
 import com.dhiroj.dummyapp.domain.usecase.UseCase
 import com.dhiroj.dummyapp.utils.AuthUiState
@@ -108,6 +110,27 @@ class ViewModel(
             useCase().collect { result ->
                 _getQuoteResponseState.value = result
 
+            }
+        }
+    }
+    private val _getProductsResponseState = MutableStateFlow<NetworkResult<ProductsResponse>>(NetworkResult.Empty)
+    val getProductsResponseState: StateFlow<NetworkResult<ProductsResponse>> = _getProductsResponseState.asStateFlow()
+    fun getProducts() {
+        viewModelScope.launch(Dispatchers.IO) {
+            useCase.getProducts().collect { result ->
+                _getProductsResponseState.value = result
+            }
+        }
+    }
+
+    private val _getProductByIdResponseState = MutableStateFlow<NetworkResult<Product>>(NetworkResult.Empty)
+    val getProductByIdResponseState: StateFlow<NetworkResult<Product>> = _getProductByIdResponseState.asStateFlow()
+    fun getProductById(
+        productId: Int
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            useCase.getProductById(productId).collect { result ->
+                _getProductByIdResponseState.value = result
             }
         }
     }
